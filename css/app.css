@@ -1,0 +1,18 @@
+#treehouse ul {
+  list-style: none;
+}
+
+#treehouse ul li {
+  display:inline-block;
+  width: 16%;
+  padding: 10px;
+}
+
+#treehouse ul li img {
+  width: 100%;
+  transition:.2s;
+}
+
+#treehouse ul li img:hover {
+  transform: scale(1.1);
+}
