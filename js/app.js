@@ -1,13 +1,19 @@
 const username = 'christinampagano'; // change to your treehouse username!
-const dataDiv = document.querySelector('#treehouse');
+const dataDiv = document.querySelector('.treehouse');
+
 /*
   ============================================================
 */
+
+let badgeHTML = '<ul>';
+
 function fetchData(url) {
   return fetch(url)
           .then(checkStatus)
           .then(res => res.json())
-          .catch(error => console.log('Looks like there was a problem ', error))
+          .catch(error => {
+            dataDiv.innerHTML = `${username} doesn't exist!`;
+          })
 }
 Promise.all([
   fetchData(`https://teamtreehouse.com/${username}.json`)
@@ -25,19 +31,26 @@ function checkStatus(response) {
 }
 
 function generateHTML(data) {
-  let badgeHTML = '<ul>';
-  const badgeList = data[0].badges;
-  for (let i = 0; i < badgeList.length; i++) {
-    let badgeName = badgeList[i]['name'];
-    let imgURL = badgeList[i]['icon_url'];
-    let courseURL = badgeList[i]['url'];
-    let html = `
-        <li><a href='${courseURL}' target='_blank'>
-        <img src='${imgURL}' alt='${badgeName}'>
-        </a></li>
-    `;
-    badgeHTML += html;
+  let badgeList = data[0].badges;
+  if (!dataDiv.classList.contains('reverse')) {
+    badgeList === badgeList.reverse();
   }
+  badgeList.forEach(createBadge);
   badgeHTML += '</ul>';
   dataDiv.innerHTML = badgeHTML;
+}
+
+function createBadge(item) {
+  let badgeName = item['name'];
+  let imgURL = item['icon_url'];
+  let courseURL = item['url'];
+  let html = `
+      <li><a href='${courseURL}' target='_blank'>
+      <img src='${imgURL}' alt='${badgeName}'>
+  `;
+  if (dataDiv.classList.contains('caption')) {
+    html += `<p class='caption'>${badgeName}</p>`  ;
+  }
+  html += `</a></li>`;
+  badgeHTML += html;
 }

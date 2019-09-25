@@ -1,18 +1,32 @@
-#treehouse ul {
+.treehouse {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+.treehouse ul {
   list-style: none;
 }
 
-#treehouse ul li {
+.treehouse ul li {
   display:inline-block;
+  vertical-align: top;
   width: 16%;
   padding: 10px;
+  font-size: .75em;
+  text-align:center;
+}
+.treehouse ul li a {
+  text-decoration: none;
+  color: #333;
 }
 
-#treehouse ul li img {
+.treehouse ul li img {
   width: 100%;
   transition:.2s;
 }
-
-#treehouse ul li img:hover {
+.treehouse ul li img:hover {
   transform: scale(1.1);
+}
+
+.treehouse ul li .caption {
+  margin-top: 5px;
+  margin-bottom: 0;
 }
